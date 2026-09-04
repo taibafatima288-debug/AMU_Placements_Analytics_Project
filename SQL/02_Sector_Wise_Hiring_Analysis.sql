@@ -1,4 +1,4 @@
--- Which sectors hired the highest number of students?
+-- Query: Which sectors hired the highest number of students?
 
 SELECT
     c.sector,
