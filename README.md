@@ -1,55 +1,52 @@
-# AMU Placement Analytics
+# Sardar Ji Baksh Sales Analytics
 
-A business analytics project analysing student placement outcomes, recruiter activity, company sectors, placement trends, internship associations, academic factors and placement packages using Excel, PostgreSQL, SQL and Power BI.
+A business analytics project analysing sales performance, outlet performance, product profitability, seasonal trends, discounts and payment behaviour using Excel, PostgreSQL, SQL and Power BI.
+
+## Project Origin
+
+This project was undertaken through a **Consulting Club**, where I was a **founding member**. The project provided an opportunity to work with a structured sales dataset and apply business analytics techniques to practical business questions.
+
+The project involved analysing transactional sales data, identifying performance patterns and translating the analysis into an interactive Power BI dashboard.
 
 ## Project Overview
 
-This project was developed to demonstrate how structured placement data can be transformed into actionable business insights using relational data modelling, SQL analysis and interactive Power BI reporting.
+This project was developed to demonstrate how transactional sales data can be transformed into business insights using relational data modelling, SQL analysis and interactive Power BI reporting.
 
-The analysis examines student information, faculties, companies and placement records to understand placement outcomes, recruiter activity, hiring patterns, academic factors and compensation.
+The analysis examines sales transactions, stores, products, customers, payment methods, discounts and profitability to understand overall business performance and identify patterns across outlets, products and time periods.
 
 The project combines dataset preparation, relational database development, SQL-based business analysis, KPI development and interactive Power BI dashboard reporting.
 
 ## Business Context
 
-The placement process involves multiple interconnected entities:
+The business dataset contains multiple entities covering stores, products, customers and sales transactions.
 
-**Students → Faculties → Placements ← Companies**
+The analysis focuses on five main areas:
 
-The dataset contains information about students, their academic and internship characteristics, faculties, recruiting companies and recorded placement outcomes.
+- Overall sales performance
+- Outlet performance
+- Product profitability
+- Monthly revenue and profit trends
+- Discount and payment behaviour
 
-The project focuses on understanding placement performance, recruiter activity, hiring patterns, factors associated with placement outcomes and differences in placement packages.
-
-## TPO Context
-
-This project is based on placement data associated with the **Training & Placement Office (TPO) at Aligarh Muslim University (AMU)**.
-
-The Training & Placement Office supports student recruitment activities by coordinating placement opportunities between students and recruiting organisations. The project uses this placement context to explore how data analytics can support the understanding of placement outcomes, recruiter activity, student characteristics and compensation patterns.
-
-The analysis focuses on four main areas:
-
-- Student placement outcomes
-- Recruiter and company activity
-- Factors associated with placement outcomes
-- Placement package analysis
-
-The project demonstrates how placement data can be structured, analysed and presented through SQL and Power BI to support data-driven reporting within a university placement context.
+The project demonstrates how transactional sales data can be structured, analysed and presented through SQL and Power BI to support business-oriented questions and decision-making.
 
 ## Objectives
 
 The main objectives of the project are to:
 
-- Analyse overall placement outcomes and placement rates
-- Identify companies with the highest number of recorded placements
-- Analyse hiring patterns across different sectors
-- Examine placement trends across graduation years
-- Compare placement outcomes by internship status
-- Analyse placement outcomes across faculties
-- Examine differences in average CGPA between placed and non-placed students
-- Analyse average placement packages across company tiers
-- Compare average packages across faculties
-- Analyse the distribution of placement packages
-- Develop an interactive Power BI dashboard for placement reporting
+- Analyse overall revenue, profit and order performance
+- Calculate average order value and profit margin
+- Compare revenue and profit across outlets
+- Identify outlets with higher average revenue per sale
+- Analyse product-level sales and profitability
+- Identify high-profit products for potential promotion
+- Identify lower-profit products for further review
+- Analyse product profit margins
+- Examine monthly revenue and profit trends
+- Compare discounted and non-discounted transactions
+- Analyse payment method performance
+- Examine transaction volume by payment method
+- Develop an interactive Power BI dashboard for sales reporting
 
 ## Technology Stack
 
@@ -57,267 +54,276 @@ The main objectives of the project are to:
 - **PostgreSQL / pgAdmin** – Relational database implementation and management
 - **SQL** – Business analysis and querying
 - **Power BI** – Interactive dashboards and business reporting
-- **DAX** – KPI and placement-rate calculations
+- **DAX** – KPI and profitability calculations
 - **GitHub** – Project documentation and portfolio presentation
 
 ## Dataset
 
-The project database contains four interconnected tables:
+The project dataset contains five business tables:
 
 | Table | Records | Description |
 |---|---:|---|
-| `students` | 500 | Student academic, demographic and placement information |
-| `faculty` | 16 | Faculty reference information |
-| `company` | 33 | Recruiter, company tier and sector information |
-| `placements` | 294 | Placement records, companies, packages and placement dates |
+| `Business_Info` | 1 | Business-level information |
+| `Stores` | 5 | Store and outlet information |
+| `Products` | 76 | Product information |
+| `Sales` | 1,562 | Transaction-level sales data |
+| `Customers` | 1,032 | Customer information |
 
-### Student Data
+### Sales Data
 
-The `students` table contains:
+The `Sales` table contains:
 
-- Enrollment Number
-- Student Name
-- CGPA
-- Gender
-- Faculty Code
-- Department
-- Aptitude Score
-- Certification Count
-- Communication Score
-- Graduation Year
-- Internship Status
-- Placement Status
+- Invoice ID
+- Date
+- Payment Method
+- Store ID
+- Product ID
+- Quantity
+- Discount %
+- Selling Price
+- Cost Price
+- Revenue
+- Cost
+- Profit
 
-### Faculty Data
-
-The `faculty` table contains:
-
-- Faculty Code
-- Faculty Name
-
-### Company Data
-
-The `company` table contains:
-
-- Company ID
-- Company Name
-- Company Tier
-- Sector
-
-### Placement Data
-
-The `placements` table contains:
-
-- Placement ID
-- Enrollment Number
-- Company ID
-- Package LPA
-- Placement Date
+The `Customers` table is maintained separately because the Sales table does not contain a Customer ID field establishing a direct relationship between customers and sales.
 
 **File:**
 
-- [AMU Placements Dataset.xlsx](AMU%20Placements%20Dataset.xlsx) – project dataset used for database development, SQL analysis and Power BI reporting.
+- [Sardar_Ji_Baksh_Sales_Dataset.xlsx](Sardar_Ji_Baksh_Sales_Dataset.xlsx) – project dataset used for database development, SQL analysis and Power BI reporting.
 
 ## Data Model
 
-The project uses a relational structure connecting faculties, students, companies and placement records.
+The project uses a relational structure connecting stores and products to sales transactions.
 
 ### Relationships
 
-**Faculty (1) → Students (*) → Placements (*) ← Company (1)**
+**Stores (1) → Sales (*)**
 
-The model allows placement records to be analysed alongside student, faculty and company attributes through related tables.
+**Products (1) → Sales (*)**
 
-There is no direct Faculty-to-Placements relationship; faculty information is connected to placement records through the students table.
+The `Customers` table does not have a direct relationship with `Sales` because the Sales table does not contain a Customer ID field.
+
+The `Business_Info` table is maintained separately as business-level reference information.
 
 ## SQL Analysis
 
-The SQL component was developed around specific business questions related to student placements and recruiter activity.
+The SQL component is organised into five analysis files covering different business areas.
 
-### 1. Top Hiring Companies
+### 1. Overall Sales KPIs
 
-**Business Question:** Which companies hired the highest number of students?
+**Business Questions:**
 
-The analysis identified:
+- What is the total revenue?
+- What is the total profit?
+- What is the total number of orders?
+- What is the average order value?
 
-- PwC – 20 hires
-- Accenture – 17 hires
-- Cambay Consulting – 16 hires
+Key results:
 
-### 2. Sector-wise Hiring Analysis
+- **Total Revenue:** ₹891,261.20
+- **Total Profit:** ₹539,595.20
+- **Total Orders:** 1,562
+- **Average Order Value:** ₹570.59
 
-**Business Question:** Which sectors recorded the highest number of placements?
+### 2. Outlet Analysis
 
-The analysis showed:
+The outlet analysis compares stores based on total revenue, total profit and average revenue per sale.
 
-- Consulting – 56 hires
-- IT Services – 42 hires
-- Business Services – 26 hires
-- Banking – 24 hires
+Key observations:
 
-### 3. Internship and Placement Analysis
+- **S003** generated the highest total profit at **₹116,167.30**.
+- **S003** generated the highest total revenue at **₹192,181.30**.
+- **S002** generated the lowest total profit at **₹96,567.70**.
+- **S002** generated the lowest total revenue at **₹159,855.70**.
+- **S001** recorded the highest average revenue per sale at **₹591.28**.
+- **S002** recorded the lowest average revenue per sale at **₹543.73**.
 
-**Business Question:** How does placement rate differ by internship status?
+### 3. Product Analysis
 
-Students with internship experience recorded a placement rate of **66.79%**, compared with **48.88%** for students without internship experience.
+The product analysis evaluates:
 
-This represents an association observed in the dataset and does not establish that internship experience caused the difference.
+- Units sold
+- Total revenue
+- Total profit
+- Profit margin
 
-### 4. Graduation Year Placement Trend
+Products with high total profit were identified as potential candidates for promotion.
 
-**Business Question:** How does the number of placed students vary across graduation years?
+Products such as **Shortbread Cookies, Dark Choco Cookie and Mint Kombucha** were among the lower-profit products and were flagged for further review based on their sales volume, revenue, pricing and costs.
 
-| Graduation Year | Placed Students |
-|---|---:|
-| 2023 | 39 |
-| 2024 | 64 |
-| 2025 | 119 |
-| 2026 | 72 |
+The highest profit margins identified included:
 
-The analysis shows variation in recorded placement counts across the observed graduating batches.
+- **Babyccino — 72.17%**
+- **Lemon Iced Tea — 69.75%**
+- **Thai Green Tea — 69.67%**
 
-### 5. Faculty-wise Placements
+### 4. Time Analysis
 
-**Business Question:** Which faculties recorded the highest number of placements?
+Monthly revenue and profit were analysed to identify changes in performance throughout the year.
 
-The analysis identified:
+Key observations:
 
-- Engineering & Technology – 52 placements
-- Management Studies & Research – 51 placements
-- Commerce – 44 placements
+- **September** generated the highest revenue at **₹81,827.90**.
+- **October** followed with **₹81,777.20**.
+- **February** generated **₹80,965.90** in revenue.
+- **September** generated the highest profit at **₹50,208.90**.
+- **June** followed with **₹49,503.00** in profit.
+- **December** recorded the lowest monthly profit at **₹34,692.50**.
+- **May** also recorded relatively low profit at **₹35,348.90**.
 
-### 6. Company Tier vs Average Package
+### 5. Discount & Payment Analysis
 
-**Business Question:** How does average placement package vary across company tiers?
+Discounted and non-discounted transactions were compared using average revenue and average profit.
 
-| Company Tier | Average Package |
-|---|---:|
-| Tier 1 | 7.81 LPA |
-| Tier 2 | 7.08 LPA |
-| Tier 3 | 5.54 LPA |
+| Discount Status | Average Revenue | Average Profit |
+|---|---:|---:|
+| No Discount | ₹601.61 | ₹379.14 |
+| Discount | ₹539.41 | ₹311.59 |
 
-These figures describe the package differences observed across company tiers in the dataset.
+Within this dataset, non-discounted orders had higher average revenue and average profit than discounted orders.
 
-### 7. CGPA and Placement Outcomes
+Payment methods were also analysed:
 
-**Business Question:** Does average CGPA differ between placed and non-placed students?
+| Payment Method | Average Revenue | Average Profit |
+|---|---:|---:|
+| Cash | ₹593.55 | ₹357.40 |
+| Card | ₹582.56 | — |
+| Wallet | ₹564.00 | — |
+| UPI | ₹556.46 | — |
 
-- Placed students – **7.76 average CGPA**
-- Non-placed students – **6.93 average CGPA**
-
-The result indicates an association between CGPA and placement status within the dataset and should not be interpreted as evidence of causation.
-
-### 8. Average Package by Faculty
-
-**Business Question:** Which faculties recorded the highest average placement packages?
-
-The analysis identified:
-
-- Engineering & Technology – 7.87 LPA
-- Management Studies & Research – 7.86 LPA
-- Medicine – 7.66 LPA
+Cash recorded the highest average revenue and average profit among the payment methods in the analysis.
 
 ## Power BI Dashboard
 
 The SQL analysis was translated into an interactive Power BI dashboard consisting of four analytical pages.
 
-### Page 1 – Placement Overview
+### Page 1 – Sales Performance Overview
 
 The overview page presents:
 
-- Total Students
-- Placed Students
-- Placement Rate
-- Average Package
-- Highest Package
-- Placement trend by graduation year
-- Placed vs Non-placed students
-- Placement rate by faculty
+- Total Revenue
+- Total Profit
+- Total Orders
+- Average Order Value
+- Profit Margin
+- Monthly Revenue Trend
+- Monthly Profit Trend
+- Revenue vs Profit by Month
+- Revenue by Store
 
-### Page 2 – Hiring & Recruiters
+Interactive slicers:
 
-This page focuses on recruiter and company activity:
+- Date
+- Store
+- Payment Method
 
-- Top Hiring Companies
-- Hiring by Sector
-- Placements by Company Tier
-- Total Recruiters
-- Company-wise Placement Distribution
+### Page 2 – Store / Outlet Performance
 
-### Page 3 – Student & Placement Factors
+This page focuses on comparing individual outlets.
 
-This page examines student-level characteristics associated with placement outcomes:
+Includes:
 
-- Internship Status vs Placement Rate
-- Average CGPA: Placed vs Non-placed
-- Placement Rate by Faculty
+- Total Stores
+- Highest Revenue Store
+- Highest Profit Store
+- Average Revenue per Sale
+- Revenue by Store
+- Profit by Store
+- Average Revenue per Sale by Store
+- Revenue vs Profit by Store
 
-### Page 4 – Package Analysis
+### Page 3 – Product & Profitability Analysis
 
-This page focuses on placement compensation:
+This page examines product-level sales and profitability.
 
-- Average Package by Company Tier
-- Average Package by Faculty
-- Package Distribution
-- Highest Package by Company
+Includes:
 
-### Dashboard Files
+- Top Products by Profit
+- Top Products by Revenue
+- Units Sold by Product
+- Profit Margin by Product
+- Products Requiring Review
 
-- [Power BI Dashboard](PowerBI/AMU_Placement_Analytics.pbix) – Power BI project file
-- [Dashboard Overview](PowerBI/Dashboard_Overview.amu.png) – dashboard preview
-- [Power BI Dashboard PDF](PowerBI/PowerBI_Dashboard.amu.pdf) – exported dashboard report
+The page allows products to be examined using multiple measures rather than relying on a single performance indicator.
+
+### Page 4 – Discounts, Payments & Sales Behaviour
+
+This page examines discount and payment behaviour.
+
+Includes:
+
+- Discount vs No Discount
+- Discount Impact on Profit
+- Average Revenue by Payment Method
+- Average Profit by Payment Method
+- Transaction Volume by Payment Method
+
+## Dashboard Files
+
+- [Power BI Dashboard](PowerBI/Sardar_Ji_Baksh_Sales_Analytics.pbix) – Power BI project file
+- [Dashboard Overview](PowerBI/Dashboard_Overview.sjb.png) – dashboard preview
+- [Power BI Dashboard PDF](PowerBI/PowerBI_Dashboard.sjb.pdf) – exported dashboard report
 
 ## Key Analytical Themes
 
-### Placement Performance
+### Sales Performance
 
-- Overall placement outcomes
-- Placement trends by graduation year
-- Faculty-level placement rates
+- Overall revenue and profit
+- Total orders
+- Average order value
+- Profit margin
+- Monthly performance
 
-### Recruiter Analysis
+### Outlet Analysis
 
-- Hiring concentration by company
-- Sector-wise hiring
-- Company-tier distribution
+- Revenue by outlet
+- Profit by outlet
+- Average revenue per sale
+- Revenue versus profit comparison
 
-### Student Factors
+### Product Analysis
 
-- Internship status
-- CGPA
-- Faculty
-- Placement outcomes
+- Top products by profit
+- Top products by revenue
+- Units sold
+- Product-level profit margins
+- Products requiring further review
 
-### Compensation Analysis
+### Sales Behaviour
 
-- Average package
-- Package distribution
-- Company-tier differences
-- Faculty-level package differences
+- Discount versus non-discounted transactions
+- Average revenue by payment method
+- Average profit by payment method
+- Transaction volume by payment method
 
 ## Project Workflow
 
-**Excel Dataset → PostgreSQL Database → SQL Analysis → Power BI Dashboard**
+**Excel Dataset → PostgreSQL Database → SQL Analysis → KPI Development → Power BI Data Modelling → Interactive Dashboard**
 
-The project begins with structured placement data, which is organised into related tables and analysed using SQL. The resulting business questions and metrics are then translated into interactive Power BI visualisations.
+The project begins with structured sales data, which is organised into related tables and analysed using SQL. The resulting business questions and metrics are then translated into interactive Power BI visualisations.
 
 ## Analytical Note
 
 The findings presented in this project describe patterns observed within the available dataset.
 
-Relationships between variables such as internship status, CGPA and placement outcomes are presented as **associations rather than causal relationships**. The analysis does not attempt to establish that any individual factor directly causes a placement outcome.
+Comparisons such as discount status, payment method, outlet performance and product profitability represent observed relationships within the data and should not be interpreted as proof of causation.
 
-The project is intended to demonstrate the application of data modelling, SQL analysis and business intelligence techniques to placement data, rather than draw causal conclusions from the observed patterns.
+For example, the comparison between discounted and non-discounted orders shows that non-discounted orders had higher average revenue and profit in this dataset, but this alone does not establish that discounts caused lower profitability.
+
+Similarly, differences between outlets, products or payment methods represent observed patterns within the dataset.
 
 ## Project Purpose
 
 This project demonstrates an end-to-end business analytics workflow involving:
 
 - Relational data modelling
-- Data organisation
+- Data preparation
 - SQL querying
 - KPI development
 - Business question formulation
+- Profitability analysis
+- Time-based analysis
 - Interactive dashboard design
 - Analytical interpretation
 - Data-driven reporting
