@@ -101,7 +101,7 @@ The `placements` table contains:
 
 **File:**
 
-- [AMU Placements Dataset.xlsx](AMU%20Placements%20Dataset%20.xlsx) – project dataset used for database development, SQL analysis and Power BI reporting.
+- [AMU Placements Dataset.xlsx](AMU%Placements%Dataset%.xlsx) – project dataset used for database development, SQL analysis and Power BI reporting.
 
 ## Data Model
 
