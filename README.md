@@ -20,6 +20,21 @@ The dataset contains information about students, their academic and internship c
 
 The project focuses on understanding placement performance, recruiter activity, hiring patterns, factors associated with placement outcomes and differences in placement packages.
 
+## TPO Context
+
+This project is based on placement data associated with the **Training & Placement Office (TPO) at Aligarh Muslim University (AMU)**.
+
+The Training & Placement Office supports student recruitment activities by coordinating placement opportunities between students and recruiting organisations. The project uses this placement context to explore how data analytics can support the understanding of placement outcomes, recruiter activity, student characteristics and compensation patterns.
+
+The analysis focuses on four main areas:
+
+- Student placement outcomes
+- Recruiter and company activity
+- Factors associated with placement outcomes
+- Placement package analysis
+
+The project demonstrates how placement data can be structured, analysed and presented through SQL and Power BI to support data-driven reporting within a university placement context.
+
 ## Objectives
 
 The main objectives of the project are to:
