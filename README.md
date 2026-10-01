@@ -290,7 +290,9 @@ The project begins with structured placement data, which is organised into relat
 
 The findings presented in this project describe patterns observed within the available dataset.
 
-Relationships between variables such as internship status, CGPA and placement outcomes are presented as **associations rather than causal relationships**. The analysis is intended to demonstrate the application of business analytics techniques to placement data rather than establish causal effects.
+Relationships between variables such as internship status, CGPA and placement outcomes are presented as **associations rather than causal relationships**. The analysis does not attempt to establish that any individual factor directly causes a placement outcome.
+
+The project is intended to demonstrate the application of data modelling, SQL analysis and business intelligence techniques to placement data, rather than draw causal conclusions from the observed patterns.
 
 ## Project Purpose
 
