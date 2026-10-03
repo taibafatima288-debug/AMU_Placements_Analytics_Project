@@ -264,8 +264,8 @@ This page focuses on placement compensation:
 ### Dashboard Files
 
 - [Power BI Dashboard](PowerBI/AMU_Placement_Analytics.pbix) – Power BI project file
-- [Dashboard Overview](PowerBI/Dashboard_Overview.amu.png) – Complete four-page dashboard overview
-- 
+- [Dashboard_Overview.png](PowerBI/Dashboard_Overview.png) – Complete four-page dashboard overview
+ 
 ## Key Analytical Themes
 
 ### Placement Performance
